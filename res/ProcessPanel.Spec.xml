@@ -1,0 +1,15 @@
+<processing>
+<job name="Install GhostScript">
+        <executeForPack name="GhostScript"/>
+	<os family="windows" />
+	<executefile name="${ENV[TEMP]}/gs910w32.exe">
+          <arg>/S</arg>
+       </executefile>
+</job>
+<job name="SET PATH GhostScript">
+        <executeForPack name="GhostScript"/>
+	<os family="windows" />
+	<executefile name="${ENV[TEMP]}/setpathgs.bat"/>
+</job>
+
+</processing>

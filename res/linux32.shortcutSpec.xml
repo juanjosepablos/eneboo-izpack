@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<shortcuts>
+  <skipIfNotSupported />
+  <programGroup defaultName="Eneboo" location="applications"/>
+	  <shortcut
+		name="Eneboo"
+		target="$INSTALL_PATH/bin/eneboo"
+		iconFile="$INSTALL_PATH/eneboo48.png" 
+		iconIndex="0"
+     		programGroup="yes"
+     		desktop="yes"
+     		applications="no"
+     		startMenu="no"
+     		startup="no">
+     		<createForPack name="Aplicacion"/>
+	  </shortcut> 
+</shortcuts>

@@ -1,0 +1,6 @@
+<registry>
+<value name="Path"
+       keypath="SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+       root="HKLM"
+       string="$OLD_KEY_VALUE;&quot;$INSTALL_PATH\bin&quot;"/>
+</registry>

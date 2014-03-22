@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<installation version="1.0">
+    <info>
+	<appname>Eneboo</appname>
+        <appversion>2.4.2.4-dba</appversion>
+	<appsubpath>Eneboo</appsubpath>
+        <url>http://www.eneboo.org/</url>
+        <authors>
+            <author name="Grupo Eneboo"  email="eneboo@googlegroups.com"  />
+        </authors>
+    </info>
+
+    <!-- Preferencias del interfaz gráfico que deseamos para nuestra instalación -->
+    <guiprefs width="640" height="480" resizable="yes"/>
+
+    <locale>
+        <langpack iso3="spa"/>
+    </locale>
+
+    <!-- Recursos de nuestra instalación -->
+    <resources>
+	<res id="shortcutSpec.xml" src="res/win32.shortcutSpec.xml"/>
+	<res id="ProcessPanel.Spec.xml" src="res/ProcessPanel.Spec.xml"/>
+	<res id="RegistrySpec.xml" src="res/RegistrySpec.xml" />
+    </resources>
+
+    <!-- Requerido para crear el ShortCut -->
+    <native type="izpack" name="ShellLink.dll"/>
+    <!-- Requerido para editar el PATH -->
+<listeners>
+    <listener installer="RegistryInstallerListener"
+        uninstaller="RegistryUninstallerListener" >
+        <os family="windows"/>
+    </listener>
+</listeners>
+<native type="3rdparty" name="COIOSHelper.dll" stage="both">
+    <os family="windows"/>
+</native>
+
+    <!-- Paneles que deseamos que sean mostrados. El orden importa excepto en el InstallPanel -->
+    <panels>
+        <panel classname="HelloPanel"/>
+        <panel classname="TargetPanel"/>
+        <panel classname="PacksPanel"/>
+	<panel classname="InstallPanel"/>
+	<panel classname="ProcessPanel"/>
+	<panel classname="ShortcutPanel"/>
+        <panel classname="SimpleFinishPanel"/>
+    </panels>
+
+    <!-- Paquetes que componen la aplicación -->
+    <packs>
+        <pack name="Aplicacion" required="yes">
+            <description>Archivos de la aplicación</description>
+            <fileset dir="eneboo-2.4.2.4-dba" includes="**" targetdir="$INSTALL_PATH"/>
+        </pack>
+        <pack name="GhostScript" required="no">
+            <description>Interprete de PostScript y PDF Ghostscript</description>
+            <file src="gs910w32.exe" targetdir="${ENV[TEMP]}"/>
+            <file src="res/setpathgs.bat" targetdir="${ENV[TEMP]}"/>
+        </pack>
+    </packs>
+</installation>
+
