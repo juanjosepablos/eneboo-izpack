@@ -6,11 +6,11 @@
 </properties>
     <info>
 	<appname>Eneboo</appname>
-        <appversion>@{eneboo.ver}<</appversion>
+        <appversion>@{eneboo.ver}</appversion>
 	<appsubpath>Eneboo</appsubpath>
         <url>http://www.eneboo.org/</url>
         <authors>
-            <author name="Grupo Eneboo"  email="eneboo@googlegroups.com"  />
+            <author name="Grupo Eneboo"  email="eneboo@googlegroups.com" />
         </authors>
     </info>
 
@@ -30,16 +30,6 @@
 
     <!-- Requerido para crear el ShortCut -->
     <native type="izpack" name="ShellLink.dll"/>
-    <!-- Requerido para editar el PATH -->
-<listeners>
-    <listener installer="RegistryInstallerListener"
-        uninstaller="RegistryUninstallerListener" >
-        <os family="windows"/>
-    </listener>
-</listeners>
-<native type="3rdparty" name="COIOSHelper.dll" stage="both">
-    <os family="windows"/>
-</native>
 
     <!-- Paneles que deseamos que sean mostrados. El orden importa excepto en el InstallPanel -->
     <panels>
@@ -56,7 +46,7 @@
     <packs>
         <pack name="Aplicacion" required="yes">
             <description>Archivos de la aplicación</description>
-            <fileset dir="eneboo-v@{eneboo.ver}<" includes="**" targetdir="$INSTALL_PATH"/>
+            <fileset dir="eneboo-v@{eneboo.ver}" includes="**" targetdir="$INSTALL_PATH"/>
         </pack>
         <pack name="GhostScript" required="no">
             <description>Interprete de PostScript y PDF Ghostscript</description>
