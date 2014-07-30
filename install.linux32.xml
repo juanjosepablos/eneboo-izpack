@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
 
 <installation version="1.0">
+<properties>
+  <property name="eneboo.ver" value="2.4.5-beta3-dba" />
+</properties>
 <info>
 	<appname>Eneboo</appname>
 	<appsubpath>Eneboo</appsubpath>
-	<appversion>2.4.2.4-dba</appversion>
+	<appversion>@{eneboo.ver}</appversion>
 	<authors>
 	    <author name="Grupo Eneboo"	 email="eneboo@googlegroups.com"  />
 	</authors>
@@ -37,7 +40,7 @@
 	<packs>
 		<pack name="Aplicacion" required="yes">
 			<description>Archivos de la aplicación</description>
-	    <fileset dir="eneboo-2.4.2.4-dba" includes="**" targetdir="$INSTALL_PATH"/>
+	    <fileset dir="eneboo-v@{eneboo.ver}" includes="**" targetdir="$INSTALL_PATH"/>
 			<executable targetfile="$INSTALL_PATH/bin/eneboo" stage="never" keep="true"/>
 	  </pack>
 	 </packs>
