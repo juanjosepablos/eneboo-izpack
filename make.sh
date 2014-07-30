@@ -1,12 +1,17 @@
 IZPACK_BIN=$HOME/IzPack/bin
-SRC_URL=http://www.eneboo.org/pub/contrib/2.4.2.4
-VER=2.4.2.4
-BUILD_LINUX32=eneboo-$VER-dba-linux32.tar.bz2
-BUILD_LINUX64=eneboo-$VER-dba-linux64.tar.bz2
-BUILD_MAC=eneboo-$VER-macOSX_i386_dba.tar.bz2
-BUILD_WIN32=eneboo-$VER-dba-win32.tar.bz2
+VER=2.4.5-beta3
+SRC_URL=http://www.eneboo.org/pub/contrib/$VER
+BUILD_LINUX32=eneboo-v$VER-dba-linux32.tar.bz2
+BUILD_LINUX64=eneboo-v$VER-dba-linux64.tar.bz2
+BUILD_MAC=eneboo-v$VER-macOSX_i386_dba.tar.bz2
+BUILD_WIN32=eneboo-v$VER-dba-win32.tar.bz2
+
+
+if [ ! -f gs910w32.exe ]; then
 
 wget -c http://downloads.sourceforge.net/ghostscript/GPL%20Ghostscript/9.07/gs910w32.exe
+
+fi 
 
 wget -c $SRC_URL/$BUILD_LINUX32 ;tar jxvf $BUILD_LINUX32
 $IZPACK_BIN/compile ./install.linux32.xml -b . -o Eneboo.$VER-dba.linux32.jar -k standard
