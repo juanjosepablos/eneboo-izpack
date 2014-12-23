@@ -2,7 +2,7 @@
 <shortcuts>
 	<skipIfNotSupported />
 	<programGroup defaultName="Eneboo" location="applications"/>
-	<shortcut name="Eneboo" target="$INSTALL_PATH/bin/eneboo.exe" iconFile="$INSTALL_PATH/eneboo48.ico" iconIndex="0" programGroup="yes" desktop="yes" applications="no" startMenu="no" startup="no">
-		<createForPack name="Aplicacion"/>
+	<shortcut name="Eneboo" target="$INSTALL_PATH/bin/eneboo.exe" iconFile="$INSTALL_PATH/share/eneboo/images/eneboo48.ico" programGroup="yes" desktop="yes">
+		<createForPack name="ShareWin32"/>
 	</shortcut>
 </shortcuts>

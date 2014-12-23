@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <shortcuts>
-	<skipIfNotSupported />
+	<skipIfNotSupported/>
 	<programGroup defaultName="Eneboo" location="applications"/>
-	<shortcut name="Eneboo" target="$INSTALL_PATH/bin/eneboo" iconFile="$INSTALL_PATH/eneboo48.png" iconIndex="0" programGroup="yes" desktop="yes" applications="no" startMenu="no" startup="no" type="Application" terminal="false" Categories="Office">
+	<shortcut name="Eneboo" target="$INSTALL_PATH/bin/eneboo" iconFile="$INSTALL_PATH/share/eneboo/images/icono48.png" encoding="UTF-8" desktop="yes" type="Application" workingDirectory="$INSTALL_PATH/bin">
+		<createForPack name="ShareLinux32"/>
 	</shortcut>
 </shortcuts>

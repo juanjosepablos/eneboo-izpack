@@ -1,47 +1,66 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
 
 <installation version="1.0">
-<properties>
-  <property name="eneboo.ver" value="2.4.5-beta3-dba" />
-</properties>
-<info>
-	<appname>Eneboo</appname>
-	<appsubpath>Eneboo</appsubpath>
-	<appversion>@{eneboo.ver}</appversion>
-	<authors>
-	    <author name="Grupo Eneboo"	 email="eneboo@googlegroups.com"  />
-	</authors>
-</info>
+	<properties>
+		<property name="eneboo.ver" value="2.4.5.1-rc4" />
+	</properties>
+	
+	<info>
+		<appname>Eneboo</appname>
+		<appsubpath>Eneboo</appsubpath>
+		<appversion>@{eneboo.ver}</appversion>
+		<authors>
+			<author name="Grupo Eneboo" email="eneboo@googlegroups.com" />
+		</authors>
+	</info>
+
 
 <!-- Preferencias del interfaz gráfico que deseamos para nuestra instalación -->
 	<guiprefs width="640" height="480" resizable="yes"/>
-
 	<locale>
 		<langpack iso3="spa"/>
 	</locale>
 
 <!-- Recursos de nuestra instalación -->
 	<resources>
-		<res id="shortcutSpec.xml" src="res/linux32.shortcutSpec.xml"/>
-		<res id="ProcessPanel.Spec.xml" src="res/ProcessPanel.Spec.xml"/>
+		<res id="Unix_shortcutSpec.xml" src="res/Unix_shortcutSpec.xml" />
 	</resources>
 
 <!-- Paneles que deseamos que sean mostrados. El orden importa excepto en el InstallPanel -->
 	<panels>
 		<panel classname="HelloPanel"/>
-		<panel classname="TargetPanel"/>
+		<panel classname="TargetPanel">
+			<configuration>
+				<ShowCreateDirectoryMessage>false</ShowCreateDirectoryMessage>
+			</configuration>
+		</panel>
+		<panel classname="InstallationGroupPanel"/>
 		<panel classname="PacksPanel"/>
 		<panel classname="InstallPanel"/>
-		<panel classname="ShortcutPanel"/>
+		<panel classname="ShortcutPanel" />
 		<panel classname="SimpleFinishPanel"/>
 	</panels>
 
 <!-- Paquetes que componen la aplicación -->
 	<packs>
-		<pack name="Aplicacion" required="yes">
+		<pack name="AplicacionLinux32dba" required="no" preselected="yes" installGroups="Linux32Dba">
 			<description>Archivos de la aplicación</description>
-	    <fileset dir="eneboo-v@{eneboo.ver}" includes="**" targetdir="$INSTALL_PATH"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-dba-linux32/bin/" targetdir="$INSTALL_PATH/bin/"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-dba-linux32/lib/" targetdir="$INSTALL_PATH/lib/"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-dba-linux32/plugins/" targetdir="$INSTALL_PATH/plugins/"/>
 			<executable targetfile="$INSTALL_PATH/bin/eneboo" stage="never" keep="true"/>
-	  </pack>
-	 </packs>
+		</pack>
+		<pack name="AplicacionLinux32quick" required="no" preselected="yes" installGroups="Linux32Quick">
+			<description>Archivos de la aplicación</description>
+			<fileset dir="eneboo-v@{eneboo.ver}-quick-linux32/bin/" targetdir="$INSTALL_PATH/bin/"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-quick-linux32/lib/" targetdir="$INSTALL_PATH/lib/"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-quick-linux32/plugins/" targetdir="$INSTALL_PATH/plugins/"/>
+			<executable targetfile="$INSTALL_PATH/bin/eneboo" stage="never" keep="true"/>
+		</pack>
+		<pack name="ShareLinux32" required="yes" installGroups="Linux32Dba,Linux32Quick">
+			<description>Librerias 32 de la aplicación</description>
+			<fileset dir="eneboo-v@{eneboo.ver}-dba-linux32/share/" targetdir="$INSTALL_PATH/share/"/>
+			<file src="eneboo-v@{eneboo.ver}-dba-linux32/COPYING" targetdir="$INSTALL_PATH/"/>
+		</pack>
+	</packs>
 </installation>

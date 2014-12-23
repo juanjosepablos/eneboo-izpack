@@ -1,58 +1,75 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
 
 <installation version="1.0">
-<properties>
-  <property name="eneboo.ver" value="2.4.5-beta3-dba" />
-</properties>
-    <info>
-	<appname>Eneboo</appname>
-        <appversion>@{eneboo.ver}</appversion>
-	<appsubpath>Eneboo</appsubpath>
-        <url>http://www.eneboo.org/</url>
-        <authors>
-            <author name="Grupo Eneboo"  email="eneboo@googlegroups.com" />
-        </authors>
-    </info>
+	
+	<properties>
+		<property name="eneboo.ver" value="2.4.5.1-rc4" />
+	</properties>
+	<info>
+		<appname>Eneboo</appname>
+		<appversion>@{eneboo.ver}</appversion>
+		<appsubpath>Eneboo</appsubpath>
+		<url>http://www.eneboo.org/</url>
+		<authors>
+			<author name="Grupo Eneboo" email="eneboo@googlegroups.com" />
+		</authors>
+	</info>
 
     <!-- Preferencias del interfaz gráfico que deseamos para nuestra instalación -->
-    <guiprefs width="640" height="480" resizable="yes"/>
-
-    <locale>
-        <langpack iso3="spa"/>
-    </locale>
+	<guiprefs width="640" height="480" resizable="yes"/>
+	<locale>
+		<langpack iso3="spa"/>
+	</locale>
 
     <!-- Recursos de nuestra instalación -->
-    <resources>
-	<res id="shortcutSpec.xml" src="res/win32.shortcutSpec.xml"/>
-	<res id="ProcessPanel.Spec.xml" src="res/ProcessPanel.Spec.xml"/>
-	<res id="RegistrySpec.xml" src="res/RegistrySpec.xml" />
-    </resources>
+	<resources>
+		<res id="shortcutSpec.xml" src="res/shortcutSpec.xml" />
+		<res id="ProcessPanel.Spec.xml" src="res/ProcessPanel.Spec.xml"/>
+		<res id="RegistrySpec.xml" src="res/RegistrySpec.xml" />
+	</resources>
+	<native type="izpack" name="ShellLink.dll"/>
 
-    <!-- Requerido para crear el ShortCut -->
-    <native type="izpack" name="ShellLink.dll"/>
 
     <!-- Paneles que deseamos que sean mostrados. El orden importa excepto en el InstallPanel -->
-    <panels>
-        <panel classname="HelloPanel"/>
-        <panel classname="TargetPanel"/>
-        <panel classname="PacksPanel"/>
-	<panel classname="InstallPanel"/>
-	<panel classname="ProcessPanel"/>
-	<panel classname="ShortcutPanel"/>
-        <panel classname="SimpleFinishPanel"/>
-    </panels>
+	<panels>
+		<panel classname="HelloPanel"/>
+		<panel classname="TargetPanel" id="target.win32">
+			<validator classname="com.izforge.izpack.installer.validator.ConditionValidator"/>
+			<configuration>
+				<ShowCreateDirectoryMessage>false</ShowCreateDirectoryMessage>
+			</configuration>
+		</panel>
+		<panel classname="InstallationGroupPanel"/>
+		<panel classname="PacksPanel"/>
+		<panel classname="InstallPanel"/>
+		<panel classname="ProcessPanel"/>
+		<panel classname="ShortcutPanel"/>
+		<panel classname="SimpleFinishPanel"/>
+	</panels>
 
     <!-- Paquetes que componen la aplicación -->
-    <packs>
-        <pack name="Aplicacion" required="yes">
-            <description>Archivos de la aplicación</description>
-            <fileset dir="eneboo-v@{eneboo.ver}" includes="**" targetdir="$INSTALL_PATH"/>
-        </pack>
-        <pack name="GhostScript" required="no">
-            <description>Interprete de PostScript y PDF Ghostscript</description>
-            <file src="gs910w32.exe" targetdir="${ENV[TEMP]}"/>
-            <file src="res/setpathgs.bat" targetdir="${ENV[TEMP]}"/>
-        </pack>
-    </packs>
+	<packs>
+		<pack name="AplicacionWin32dba" required="no" preselected="yes" installGroups="Win32Dba">
+			<description>Archivos de la aplicación</description>
+			<fileset dir="eneboo-v@{eneboo.ver}-dba-win32/bin/" targetdir="$INSTALL_PATH/bin/"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-dba-win32/plugins/" targetdir="$INSTALL_PATH/plugins/"/>
+		</pack>
+		<pack name="AplicacionWin32quick" required="no" preselected="yes" installGroups="Win32Quick">
+			<description>Archivos de la aplicación</description>
+			<fileset dir="eneboo-v@{eneboo.ver}-quick-win32/bin/" targetdir="$INSTALL_PATH/bin/"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-quick-win32/plugins/" targetdir="$INSTALL_PATH/plugins/"/>
+		</pack>
+		<pack name="ShareWin32" required="yes" installGroups="Win32Dba,Win32Quick">
+			<description>Librerias 32 de la aplicación</description>
+			<fileset dir="eneboo-v@{eneboo.ver}-dba-linux32/share/" targetdir="$INSTALL_PATH/share/"/>
+			<file src="eneboo-v@{eneboo.ver}-dba-linux32/COPYING" targetdir="$INSTALL_PATH/"/>
+			<file src="res/eneboo48.ico" targetdir="$INSTALL_PATH/share/eneboo/images/"/>
+		</pack>
+		<pack name="GhostScript" required="no" installGroups="Win32Dba,Win32Quick">
+			<description>Interprete de PostScript y PDF Ghostscript</description>
+			<file src="gs910w32.exe" targetdir="${ENV[TEMP]}"/>
+			<file src="res/setpathgs.bat" targetdir="${ENV[TEMP]}"/>
+		</pack>
+	</packs>
 </installation>
 
