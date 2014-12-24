@@ -4,6 +4,7 @@ SRC_URL=http://www.eneboo.org/pub/contrib/$VER
 BUILD_LINUX32=eneboo-v$VER-dba-linux32.tar.bz2
 BUILD_LINUX32_QUICK=eneboo-v$VER-quick-linux32.tar.bz2
 BUILD_LINUX64=eneboo-v$VER-dba-linux64.tar.bz2
+BUILD_LINUX64_QUICK=eneboo-v$VER-quick-linux64.tar.bz2
 BUILD_MAC=eneboo-v$VER-dba-mac-i686.tar.bz2
 BUILD_WIN32=eneboo-v$VER-dba-win32.tar.bz2
 BUILD_WIN32_QUICK=eneboo-v$VER-quick-win32.tar.bz2
@@ -25,6 +26,10 @@ fi
 
 if [ ! -f $BUILD_LINUX64 ]; then
 wget -c $SRC_URL/$BUILD_LINUX64 ;tar jxvf $BUILD_LINUX64 ; mv eneboo-build-linux64-dba eneboo-v$VER-dba-linux64
+fi 
+
+if [ ! -f $BUILD_LINUX64_QUICK ]; then
+wget -c $SRC_URL/$BUILD_LINUX64_QUICK ;tar jxvf $BUILD_LINUX64_QUICK ; mv eneboo-build-linux64-quick eneboo-v$VER-quick-linux64
 fi 
 
 if [ ! -f $BUILD_MAC ]; then
