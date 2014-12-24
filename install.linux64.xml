@@ -2,7 +2,7 @@
 
 <installation version="1.0">
 <properties>
-  <property name="eneboo.ver" value="2.4.5-beta3-dba" />
+  <property name="eneboo.ver" value="2.4.5.1-rc4" />
 </properties>
 <info>
 	<appname>Eneboo</appname>
@@ -15,21 +15,20 @@
 
 <!-- Preferencias del interfaz gráfico que deseamos para nuestra instalación -->
 	<guiprefs width="640" height="480" resizable="yes"/>
-
 	<locale>
 		<langpack iso3="spa"/>
 	</locale>
 
 <!-- Recursos de nuestra instalación -->
 	<resources>
-		<res id="shortcutSpec.xml" src="res/linux64.shortcutSpec.xml"/>
-		<res id="ProcessPanel.Spec.xml" src="res/ProcessPanel.Spec.xml"/>
+		<res id="Unix_shortcutSpec.xml" src="res/Unix_shortcutSpec.xml" />
 	</resources>
 
 <!-- Paneles que deseamos que sean mostrados. El orden importa excepto en el InstallPanel -->
 	<panels>
 		<panel classname="HelloPanel"/>
 		<panel classname="TargetPanel"/>
+		<panel classname="InstallationGroupPanel"/>
 		<panel classname="PacksPanel"/>
 		<panel classname="InstallPanel"/>
 		<panel classname="ShortcutPanel"/>
@@ -38,10 +37,24 @@
 
 <!-- Paquetes que componen la aplicación -->
 	<packs>
-		<pack name="Aplicacion" required="yes">
+		<pack name="AplicacionLinux64dba" required="no" preselected="yes" installGroups="Linux64Dba">
 			<description>Archivos de la aplicación</description>
-	    <fileset dir="eneboo-v@{eneboo.ver}" includes="**" targetdir="$INSTALL_PATH"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-dba-linux64/bin/" targetdir="$INSTALL_PATH/bin/"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-dba-linux64/lib/" targetdir="$INSTALL_PATH/lib/"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-dba-linux64/plugins/" targetdir="$INSTALL_PATH/plugins/"/>
 			<executable targetfile="$INSTALL_PATH/bin/eneboo" stage="never" keep="true"/>
-	  </pack>
-	 </packs>
+		</pack>
+		<pack name="AplicacionLinux64quick" required="no" preselected="yes" installGroups="Linux64Quick">
+			<description>Archivos de la aplicación</description>
+			<fileset dir="eneboo-v@{eneboo.ver}-quick-linux64/bin/" targetdir="$INSTALL_PATH/bin/"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-quick-linux64/lib/" targetdir="$INSTALL_PATH/lib/"/>
+			<fileset dir="eneboo-v@{eneboo.ver}-quick-linux64/plugins/" targetdir="$INSTALL_PATH/plugins/"/>
+			<executable targetfile="$INSTALL_PATH/bin/eneboo" stage="never" keep="true"/>
+		</pack>
+		<pack name="ShareLinux32" required="yes" installGroups="Linux64Dba,Linux64Quick">
+			<description>Librerias 64 de la aplicación</description>
+			<fileset dir="eneboo-v@{eneboo.ver}-dba-linux64/share/" targetdir="$INSTALL_PATH/share/"/>
+			<file src="eneboo-v@{eneboo.ver}-dba-linux64/COPYING" targetdir="$INSTALL_PATH/"/>
+		</pack>
+	</packs>
 </installation>
