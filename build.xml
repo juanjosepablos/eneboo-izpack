@@ -1,45 +1,46 @@
 <?xml version="1.0"?>
-<project default="install">
+<project default="installer">
   <path id="build.classpath">
     <fileset dir="${user.home}/IzPack">
       <include name="lib/*.jar" />
     </fileset>
   </path>
-  <property name="eneboo.ver" value="2.4.5-rc7"/>
-  <property name="eneboo-core.git" value="../eneboo-core"/>
-  <property name="standard.eneboopkg" value="../eneboo-features/prj0001-standard/build/standard.20150118.eneboopkg"/>
+  <property name="eneboo.ver" value="2.4.5-rc7" />
+  <property name="eneboo-core.git" value="../eneboo-core" />
+  <property name="standard.eneboopkg" value="../eneboo-features/prj0001-standard/build/standard.20150118.eneboopkg" />
   <taskdef name="izpack" classpathref="build.classpath" classname="com.izforge.izpack.ant.IzPackTask" />
 
-  <target name="installer-linux" depends="installer-linux32,installer-linux64"/>
-  <target name="installer-windows" depends="installer-win32,installer-win64"/>
-  <target name="installer-mac"/>
-	
+  <target name="installer" depends="installer-linux,installer-windows" />
+  <target name="installer-linux" depends="installer-linux32,installer-linux64" />
+  <target name="installer-windows" depends="installer-win32,installer-win64" />
+  <target name="installer-mac" />
+
   <target name="installer-linux32">
-    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-dba-linux32.tar.bz2" dest="." compression="bzip2"/>
-    <move file="eneboo-v${eneboo.ver}-dba" tofile="eneboo-v${eneboo.ver}-dba-linux32"/>
-    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-quick-linux32.tar.bz2" dest="." compression="bzip2"/>
-    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-quick-linux32"/>
+    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-dba-linux32.tar.bz2" dest="." compression="bzip2" />
+    <move file="eneboo-v${eneboo.ver}-dba" tofile="eneboo-v${eneboo.ver}-dba-linux32" />
+    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-quick-linux32.tar.bz2" dest="." compression="bzip2" />
+    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-quick-linux32" />
     <izpack input="install.linux32.xml" output="eneboo-v${eneboo.ver}-linux32.jar" installerType="standard" inheritAll="true" basedir="${basedir}" izPackDir="${user.home}/IzPack/" />
   </target>
   <target name="installer-linux64">
-    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-dba-linux64.tar.bz2" dest="." compression="bzip2"/>
-    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-dba-linux64"/>
-    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-quick-linux64.tar.bz2" dest="." compression="bzip2"/>
-    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-quick-linux64"/>
+    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-dba-linux64.tar.bz2" dest="." compression="bzip2" />
+    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-dba-linux64" />
+    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-quick-linux64.tar.bz2" dest="." compression="bzip2" />
+    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-quick-linux64" />
     <izpack input="install.linux64.xml" output="eneboo-v${eneboo.ver}-linux64.jar" installerType="standard" inheritAll="true" basedir="${basedir}" izPackDir="${user.home}/IzPack/" />
   </target>
   <target name="installer-win32">
-    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-dba-win32.tar.bz2" dest="." compression="bzip2"/>
-    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-dba-win32"/>
-    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-quick-win32.tar.bz2" dest="." compression="bzip2"/>
-    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-quick-win32"/>
+    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-dba-win32.tar.bz2" dest="." compression="bzip2" />
+    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-dba-win32" />
+    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-quick-win32.tar.bz2" dest="." compression="bzip2" />
+    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-quick-win32" />
     <izpack input="install.win32.xml" output="eneboo-v${eneboo.ver}-win32.jar" installerType="standard" inheritAll="true" basedir="${basedir}" izPackDir="${user.home}/IzPack/" />
   </target>
-  <target name="installer.win64">
-    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-dba-win64.tar.bz2" dest="." compression="bzip2"/>
-    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-dba-win64"/>
-    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-quick-win64.tar.bz2" dest="." compression="bzip2"/>
-    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-quick-win64"/>
+  <target name="installer-win64">
+    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-dba-win64.tar.bz2" dest="." compression="bzip2" />
+    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-dba-win64" />
+    <untar src="${eneboo-core.git}/export/eneboo-v${eneboo.ver}-quick-win64.tar.bz2" dest="." compression="bzip2" />
+    <move file="eneboo-v${eneboo.ver}-quick" tofile="eneboo-v${eneboo.ver}-quick-win64" />
     <izpack input="install.win64.xml" output="eneboo-v${eneboo.ver}-win64.jar" installerType="standard" inheritAll="true" basedir="${basedir}" izPackDir="${user.home}/IzPack/" />
   </target>
 </project>
